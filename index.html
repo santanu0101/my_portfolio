@@ -1727,6 +1727,48 @@
                 </div>
               </div>
             </div>
+
+
+            <div class="project-card">
+              <div
+                class="project-image"
+                style="background: linear-gradient(135deg, #f97316, #ef4444)">
+                <div class="flex items-center justify-center h-full">
+                  <img src="./ss/Planner.png" alt="" />
+                </div>
+              </div>
+              <div class="project-content">
+                <div>
+                  <h3 class="project-title">Task Management</h3>
+                  <p class="project-description">
+                    Here You can manage your daily task with clean user
+                    interface.
+                  </p>
+                  <div class="tech-tags">
+                    <span class="tech-tag bg-blue-500/20 text-blue-300"
+                      >React</span
+                    >
+                    <span class="tech-tag bg-purple-500/20 text-purple-300"
+                      >JavaScript</span
+                    >
+                  </div>
+                </div>
+                <div class="project-links">
+                  <a
+                    href="https://task-manager-using-react-one.vercel.app/"
+                    target="_blank"
+                    class="project-link">
+                    <i class="fas fa-external-link-alt"></i>Live Demo
+                  </a>
+                  <a
+                    href="https://github.com/santanu0101/Task-Manager-Using-React.git"
+                    target="_blank"
+                    class="project-link">
+                    <i class="fab fa-github"></i>Code
+                  </a>
+                </div>
+              </div>
+            </div>
             <div class="project-card">
               <div
                 class="project-image"
@@ -1977,33 +2019,38 @@
             <div class="glass-effect p-8 rounded-2xl">
               <h3 class="text-2xl font-bold mb-6 text-white">Send Message</h3>
 
-              <form class="space-y-6">
+              <form action="POST" name="google-sheet" class="space-y-6">
                 <div>
                   <input
                     type="text"
                     placeholder="Your Name"
+                    name="Name"
                     class="w-full p-4 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:border-opacity-50 focus:outline-none transition-all" />
                 </div>
                 <div>
                   <input
                     type="email"
                     placeholder="Your Email"
+                     name="Email"
                     class="w-full p-4 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:border-opacity-50 focus:outline-none transition-all" />
                 </div>
                 <div>
                   <input
                     type="text"
                     placeholder="Subject"
+                     name="Subject"
                     class="w-full p-4 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:border-opacity-50 focus:outline-none transition-all" />
                 </div>
                 <div>
                   <textarea
                     rows="5"
-                    placeholder="Your Message"
+                    placeholder="Your Message" 
+                    name="Message"
                     class="w-full p-4 rounded-lg bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-70 border border-white border-opacity-30 focus:border-opacity-50 focus:outline-none transition-all resize-none"></textarea>
                 </div>
                 <button
                   type="submit"
+                  name="Submit"
                   class="w-full bg-white text-gray-800 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
                   Send Message
                   <i class="fas fa-paper-plane ml-2"></i>
@@ -2271,9 +2318,20 @@ CERTIFICATIONS:
       });
 
       // Form submission
+
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbzkJWeQY0bvcK-j1ZWgwnAg2B4tZ-zj7L1v4NhfDjgrbVDO04s_54mMg_UBy-c4hDKJBw/exec";
+
       document.querySelector("form").addEventListener("submit", (e) => {
         e.preventDefault();
-        alert("Thank you for your message! I will get back to you soon.");
+        fetch(scriptURL, { method: "POST", body: new FormData(e.target) })
+          .then((response) =>
+            setTimeout(function () {
+              location.reload(true);
+            }, 100)
+          )
+          .catch((error) => alert(error.message));
+        
       });
 
       let currentIndex = 0;
@@ -2450,6 +2508,10 @@ CERTIFICATIONS:
           }
         }, 300);
       }
+
+      
+
+      
     </script>
   </body>
 </html>
